@@ -22,8 +22,13 @@ class DicePage extends StatefulWidget {
 }
 
 class _DicePageState extends State<DicePage> {
-  int leftDiceNumber = Random().nextInt(6) + 1;
-  int rightDiceNumber = Random().nextInt(6) + 1;
+  static const int minNumber = 1;
+  static const int maxNumber = 6;
+  static int getRandomInt(int min, int max) => Random().nextInt(max - min + 1) + min;
+
+  int leftDiceNumber = getRandomInt(minNumber, maxNumber);
+  int rightDiceNumber = getRandomInt(minNumber, maxNumber);
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,8 @@ class _DicePageState extends State<DicePage> {
             child: FlatButton(
               onPressed: () {
                 setState(() {
-                  leftDiceNumber = Random().nextInt(6) + 1;
+                  leftDiceNumber = getRandomInt(minNumber, maxNumber);
+                  rightDiceNumber = getRandomInt(minNumber, maxNumber);
                 });
               },
               child: Image.asset('images/dice$leftDiceNumber.png'),
@@ -44,7 +50,8 @@ class _DicePageState extends State<DicePage> {
             child: FlatButton(
               onPressed: () {
                 setState(() {
-                  rightDiceNumber = Random().nextInt(6) + 1;
+                  leftDiceNumber = getRandomInt(minNumber, maxNumber);
+                  rightDiceNumber = getRandomInt(minNumber, maxNumber);
                 });
               },
               child: Image.asset('images/dice$rightDiceNumber.png'),
